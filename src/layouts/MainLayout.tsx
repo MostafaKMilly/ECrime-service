@@ -5,10 +5,10 @@ import React, { PropsWithChildren } from "react";
 
 const MainLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <Box>
+    <Box height={"100%"}>
       <CssBaseline />
       <Header />
-      <Box component="main" sx={{ pt: "32px" }}>
+      <Box component="main" height={"100%"}>
         {children}
       </Box>
     </Box>

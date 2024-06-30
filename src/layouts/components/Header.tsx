@@ -62,6 +62,7 @@ const Header: React.FC = () => {
     >
       <Toolbar
         sx={{
+          background: "white",
           px: {
             xs: "24px",
             md: "32px",
@@ -134,7 +135,7 @@ const Header: React.FC = () => {
           overflow: "hidden",
         }}
       >
-        <Toolbar sx={{ px: "32px" }}>
+        <Toolbar sx={{ px: "32px", background: "white" }}>
           <Box
             sx={{
               display: "flex",

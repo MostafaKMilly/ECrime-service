@@ -4,3 +4,10 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Bukrabolditalic";
+  src: url("/fonts/Bukrabolditalic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
