@@ -11,73 +11,37 @@ import { styled } from "@mui/material/styles";
 import AccessibleIcon from "@mui/icons-material/Accessible";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
-const HoverButton = styled(Button)(({ theme }) => ({
-  position: "relative",
-  overflow: "hidden",
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    width: "100%",
-    height: "2px",
-    bottom: 0,
-    left: "-100%",
-    backgroundColor: theme.palette.primary.main,
-    transition: "left 0.3s ease-in-out",
-  },
-  "&:hover": {
-    background: "transparent",
-  },
-  "&:hover::before": {
-    left: 0,
-  },
-}));
-
 const Header: React.FC = () => {
   const [showSection, setShowSection] = useState(true);
-
-  const handleScroll = () => {
-    if (window.scrollY > 10) {
-      setShowSection(false);
-    } else {
-      setShowSection(true);
-    }
-  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
+    const handleScroll = () => {
+      setShowSection(window.scrollY <= 5);
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
   return (
-    <AppBar
-      position="sticky"
-      color="transparent"
-      elevation={0}
-      sx={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.04)" }}
-    >
+    <AppBar position="sticky" color="transparent" elevation={0}>
       <Toolbar
         sx={{
           background: "white",
-          px: {
-            xs: "24px",
-            md: "32px",
-          },
+          boxShadow: showSection ? "none" : "0 4px 8px rgba(0, 0, 0, 0.04)",
+          px: { xs: "24px", md: "32px" },
           pt: "24px",
-          pb: {
-            xs: "24px",
-            md: "8px",
-          },
+          pb: { xs: "24px", md: "8px" },
         }}
       >
         <Box
           sx={{
             display: "flex",
-            justifyContent: isMobile ? "space-between" : "space-between",
+            justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
           }}
@@ -125,87 +89,89 @@ const Header: React.FC = () => {
           )}
         </Box>
       </Toolbar>
-      <Box
-        sx={{
-          maxHeight: showSection && !isMobile ? "200px" : "0px",
-          opacity: showSection && !isMobile ? 1 : 0,
-          visibility: showSection && !isMobile ? "visible" : "hidden",
-          transition:
-            "max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease",
-          overflow: "hidden",
-        }}
-      >
-        <Toolbar sx={{ px: "32px", background: "white" }}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ ml: 1 }}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Box display={{ xs: "none", lg: "flex" }}>
-                <HoverButton
-                  color="inherit"
-                  sx={{ fontSize: "16px", fontWeight: "normal" }}
-                >
-                  Home
-                </HoverButton>
-                <HoverButton
-                  color="inherit"
-                  sx={{ fontSize: "16px", fontWeight: "normal" }}
-                >
-                  About Us
-                </HoverButton>
-                <HoverButton
-                  color="inherit"
-                  sx={{ fontSize: "16px", fontWeight: "normal" }}
-                >
-                  Open Data
-                </HoverButton>
-                <HoverButton
-                  color="inherit"
-                  sx={{ fontSize: "16px", fontWeight: "normal" }}
-                >
-                  Application Status
-                </HoverButton>
-                <HoverButton
-                  color="inherit"
-                  sx={{ fontSize: "16px", fontWeight: "normal" }}
-                >
-                  Help & Support
-                </HoverButton>
-              </Box>
-            </Box>
+      {!isMobile && (
+        <Box
+          sx={{
+            maxHeight: "200px",
+            opacity: showSection ? 1 : 0,
+            visibility: showSection ? "visible" : "hidden",
+            transition:
+              "max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease",
+            overflow: "hidden",
+          }}
+        >
+          <Toolbar sx={{ px: "32px", background: "white" }}>
             <Box
               sx={{
                 display: "flex",
-                alignItems: "center",
-                gap: "15px",
+                justifyContent: "space-between",
+                width: "100%",
               }}
             >
-              <Chip icon={<SearchIcon />} label={"Search..."} clickable />
-              <Chip icon={<AccessibleIcon />} clickable />
-              <Chip label="العربية" clickable />
-              <Chip
-                label="Login"
-                icon={<AccountCircleOutlinedIcon />}
-                clickable
-              />
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  sx={{ ml: 1 }}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Box display={{ xs: "none", lg: "flex" }}>
+                  {[
+                    "Home",
+                    "About Us",
+                    "Open Data",
+                    "Application Status",
+                    "Help & Support",
+                  ].map((text) => (
+                    <MenuButton
+                      key={text}
+                      color="inherit"
+                      sx={{ fontSize: "16px", fontWeight: "normal" }}
+                    >
+                      {text}
+                    </MenuButton>
+                  ))}
+                </Box>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", gap: "15px" }}>
+                <Chip icon={<SearchIcon />} label="Search..." clickable />
+                <Chip icon={<AccessibleIcon />} clickable />
+                <Chip label="العربية" clickable />
+                <Chip
+                  label="Login"
+                  icon={<AccountCircleOutlinedIcon />}
+                  clickable
+                />
+              </Box>
             </Box>
-          </Box>
-        </Toolbar>
-      </Box>
+          </Toolbar>
+        </Box>
+      )}
     </AppBar>
   );
 };
+
+const MenuButton = styled(Button)(({ theme }) => ({
+  position: "relative",
+  overflow: "hidden",
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    width: "100%",
+    height: "2px",
+    bottom: 0,
+    left: "-100%",
+    backgroundColor: theme.palette.primary.main,
+    transition: "left 0.3s ease-in-out",
+  },
+  "&:hover": {
+    background: "transparent",
+  },
+  "&:hover::before": {
+    left: 0,
+  },
+}));
 
 export default Header;

@@ -2,6 +2,7 @@ import { TypographyOptions } from "@mui/material/styles/createTypography";
 
 const PRIMARY_FONT = "DubaiRegular, Open Sans, sans-serif";
 const SECONDRY_FONT = "Bukrabolditalic, Open Sans, sans-serif";
+const THIRD_FONT = "Bukrabold, Open Sans, sans-serif";
 
 const typography: TypographyOptions = {
   fontFamily: PRIMARY_FONT,
@@ -18,9 +19,9 @@ const typography: TypographyOptions = {
     fontSize: 30,
   },
   h2: {
-    fontFamily: PRIMARY_FONT,
+    fontFamily: SECONDRY_FONT,
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 24,
   },
   h3: {
     fontFamily: PRIMARY_FONT,
@@ -41,6 +42,11 @@ const typography: TypographyOptions = {
     fontFamily: PRIMARY_FONT,
     fontWeight: 400,
     fontSize: 14,
+  },
+  subtitle1: {
+    fontFamily: THIRD_FONT,
+    fontSize: 12,
+    fontWeight: 400,
   },
   button: {
     fontFamily: PRIMARY_FONT,
