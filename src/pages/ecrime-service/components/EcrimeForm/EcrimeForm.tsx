@@ -17,10 +17,11 @@ const EcrimeForm = () => {
         borderRadius: "22px",
         backgroundColor: { xs: "transparent", md: "white" },
         boxShadow: { xs: "none", md: "0 19px 31px 0 rgba(0,0,0,0.11)" },
-        px: {
+        p: {
           xs: "24px",
           md: "50px",
         },
+
         pt: {
           xs: "0px",
           md: "50px",

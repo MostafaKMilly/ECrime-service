@@ -11,7 +11,6 @@ const EcrimeServiceContainer: React.FC<StackProps> = ({
       {...props}
       sx={{
         width: "100%",
-        height: "100%",
         pt: "32px",
         gap: {
           xs: "24px",

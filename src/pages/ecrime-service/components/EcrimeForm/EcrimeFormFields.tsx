@@ -10,6 +10,9 @@ import {
   Typography,
   MenuItem,
   Stack,
+  RadioGroup,
+  Radio,
+  FormControl,
 } from "@mui/material";
 import GenericTextField from "../../../../shared/components/GenericTextField";
 import GenericSelect from "../../../../shared/components/GenericSelect";
@@ -202,8 +205,6 @@ const EcrimeFormFields = () => {
             <GenericTextField
               {...field}
               label="Details"
-              multiline
-              rows={4}
               placeholder="(Maximum limit: 2000 characters)"
               required
               fullWidth
@@ -231,7 +232,7 @@ const EcrimeFormFields = () => {
 
       <Stack gap="32px">
         <Box display="flex" alignItems="center">
-          <AccountCircleIcon
+          <AttachFileIcon
             sx={{
               width: { xs: "30px", md: "40px" },
               height: { xs: "30px", md: "40px" },
@@ -268,7 +269,7 @@ const EcrimeFormFields = () => {
 
       <Stack gap="32px">
         <Box display="flex" alignItems="center">
-          <AccountCircleIcon
+          <DescriptionIcon
             sx={{
               width: { xs: "30px", md: "40px" },
               height: { xs: "30px", md: "40px" },
@@ -278,12 +279,39 @@ const EcrimeFormFields = () => {
             Financial Losses
           </Typography>
         </Box>
-        <FormControlLabel
-          control={
-            <Field name="financialLosses" type="checkbox" as={Checkbox} />
-          }
-          label="Are there any financial losses?"
-        />
+        <Field name="financialLosses">
+          {({ field }: FieldProps<boolean>) => (
+            <FormControl
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                variant="subtitle1"
+                component="legend"
+                style={{ marginRight: "16px" }}
+              >
+                Are there any financial losses?
+              </Typography>
+              <RadioGroup {...field} row>
+                <FormControlLabel
+                  value={true}
+                  control={<Radio />}
+                  label="Yes"
+                  style={{ marginRight: "16px" }}
+                />
+                <FormControlLabel
+                  value={false}
+                  control={<Radio />}
+                  label="No"
+                />
+              </RadioGroup>
+            </FormControl>
+          )}
+        </Field>
+
         <ErrorMessage name="financialLosses">
           {(msg) => <div style={{ color: "red" }}>{msg}</div>}
         </ErrorMessage>
@@ -292,7 +320,7 @@ const EcrimeFormFields = () => {
       <Stack gap="32px">
         <FormControlLabel
           control={<Field name="acceptTerms" type="checkbox" as={Checkbox} />}
-          label="Accept terms"
+          label="I accept the Terms and Conditions"
         />
         <ErrorMessage name="acceptTerms">
           {(msg) => <div style={{ color: "red" }}>{msg}</div>}
