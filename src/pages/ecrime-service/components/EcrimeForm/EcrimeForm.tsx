@@ -21,7 +21,6 @@ const EcrimeForm = () => {
           xs: "24px",
           md: "50px",
         },
-
         pt: {
           xs: "0px",
           md: "50px",

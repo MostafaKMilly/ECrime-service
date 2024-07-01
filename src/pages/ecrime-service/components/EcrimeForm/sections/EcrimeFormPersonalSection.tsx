@@ -1,26 +1,21 @@
-import React, { useEffect } from "react";
-import { Field, FieldProps, getIn, useFormikContext } from "formik";
+import React from "react";
+import { useFormikContext } from "formik";
 import { MenuItem, Stack } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import InputMask from "react-input-mask";
 import {
   FormField,
   FormSelect,
-  GenericTextField,
   RadioField,
   SectionHeader,
-} from "../../../../shared/components";
-import { EcrimeFormValues } from "./types/EcrimeForm.type";
+  InputMaskField,
+} from "../../../../../shared/components";
+import { EcrimeFormValues } from "../types/EcrimeForm.type";
 import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
 import ImportContactsOutlinedIcon from "@mui/icons-material/ImportContactsOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 
-const EcrimeFormPersonal: React.FC = () => {
-  const { values, setFieldValue } = useFormikContext<EcrimeFormValues>();
-
-  useEffect(() => {
-    setFieldValue("personal.hasIdentity", true);
-  }, [setFieldValue]);
+const EcrimeFormPersonalSection: React.FC = () => {
+  const { values } = useFormikContext<EcrimeFormValues>();
 
   return (
     <Stack gap="32px">
@@ -30,57 +25,22 @@ const EcrimeFormPersonal: React.FC = () => {
         name="personal.hasIdentity"
         label="Do you have Identity?"
         options={[
-          { value: "true", label: "Yes" },
-          { value: "false", label: "No" },
+          { value: true, label: "Yes" },
+          { value: false, label: "No" },
         ]}
-        row
-        defaultChecked
-        onChange={(value) =>
-          setFieldValue("personal.hasIdentity", value === "true")
-        }
+        required
       />
 
       {values.personal?.hasIdentity && (
         <>
-          <Field name="personal.emiratesId">
-            {({ field, form }: FieldProps<string>) => (
-              <InputMask
-                {...field}
-                mask="999-9999-9999999-9"
-                maskChar={null}
-                onChange={(e: { target: { value: string } }) =>
-                  form.setFieldValue("personal.emiratesId", e.target.value)
-                }
-              >
-                {
-                  (() => {
-                    return (
-                      <GenericTextField
-                        label="Emirates ID"
-                        placeholder="XXX-XXXX-XXXXXXX-X"
-                        required
-                        fullWidth
-                        icon={CreditCardOutlinedIcon}
-                        error={Boolean(
-                          getIn(form.errors, "personal.emiratesId") &&
-                            getIn(form.touched, "personal.emiratesId")
-                        )}
-                        helperText={
-                          getIn(form.errors, "personal.emiratesId") &&
-                          getIn(form.touched, "personal.emiratesId")
-                            ? (getIn(
-                                form.errors,
-                                "personal.emiratesId"
-                              ) as string)
-                            : ""
-                        }
-                      />
-                    );
-                  }) as unknown as React.ReactNode
-                }
-              </InputMask>
-            )}
-          </Field>
+          <InputMaskField
+            name="personal.emiratesId"
+            label="Emirates ID"
+            placeholder="XXX-XXXX-XXXXXXX-X"
+            required
+            icon={CreditCardOutlinedIcon}
+            mask="999-9999-9999999-9"
+          />
           <FormField
             name="personal.address"
             label="Address"
@@ -147,4 +107,4 @@ const EcrimeFormPersonal: React.FC = () => {
   );
 };
 
-export default EcrimeFormPersonal;
+export default EcrimeFormPersonalSection;

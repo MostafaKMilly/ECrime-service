@@ -1,4 +1,4 @@
-import { Field, FieldProps } from "formik";
+import { ErrorMessage, Field, FieldProps } from "formik";
 import {
   Radio,
   RadioGroup,
@@ -11,9 +11,9 @@ import {
 type RadioFieldProps = RadioGroupProps & {
   name: string;
   label: string;
-  options: { value: string; label: string }[];
+  options: { value: boolean; label: string }[];
   row?: boolean;
-  onChange?: (value: string) => void;
+  required?: boolean;
 };
 
 const RadioField: React.FC<RadioFieldProps> = ({
@@ -21,7 +21,7 @@ const RadioField: React.FC<RadioFieldProps> = ({
   label,
   options,
   row = true,
-  onChange,
+  required = false,
   ...props
 }) => (
   <Box
@@ -43,22 +43,23 @@ const RadioField: React.FC<RadioFieldProps> = ({
       }}
     >
       {label}
+      {required && <span style={{ color: "red" }}>*</span>}
     </Typography>
     <Field name={name}>
-      {({ field, form }: FieldProps<string>) => (
+      {({ field, form }: FieldProps<boolean>) => (
         <RadioGroup
           {...field}
           {...props}
           row={row}
           onChange={(event) => {
-            form.setFieldValue(name, event.target.value);
-            if (onChange) onChange(event.target.value);
+            const value = event.target.value === "true";
+            form.setFieldValue(name, value);
           }}
         >
           {options.map((option) => (
             <FormControlLabel
-              key={option.value}
-              value={option.value}
+              key={option.value.toString()}
+              value={option.value.toString()}
               control={<Radio />}
               label={option.label}
             />
@@ -66,6 +67,9 @@ const RadioField: React.FC<RadioFieldProps> = ({
         </RadioGroup>
       )}
     </Field>
+    <ErrorMessage name={name}>
+      {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+    </ErrorMessage>
   </Box>
 );
 

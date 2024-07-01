@@ -1,9 +1,9 @@
 import { Stack } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { FormField, SectionHeader } from "../../../../shared/components";
+import { FormField, SectionHeader } from "../../../../../shared/components";
 
-const EcrimeFormGovernmentEntityDetails: React.FC = () => (
+const EcrimeFormGovernmentEntityDetailsSection: React.FC = () => (
   <Stack gap="32px">
     <SectionHeader icon={AccountCircleIcon} title="Government Entity Details" />
     <FormField
@@ -28,4 +28,4 @@ const EcrimeFormGovernmentEntityDetails: React.FC = () => (
   </Stack>
 );
 
-export default EcrimeFormGovernmentEntityDetails;
+export default EcrimeFormGovernmentEntityDetailsSection;

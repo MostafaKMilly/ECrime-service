@@ -1,10 +1,10 @@
 import { Box, Stack, Typography } from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { Field, FieldProps, ErrorMessage } from "formik";
-import GenericTextField from "../../../../shared/components/GenericTextField";
-import { SectionHeader } from "../../../../shared/components";
+import GenericTextField from "../../../../../shared/components/GenericTextField";
+import { SectionHeader } from "../../../../../shared/components";
 
-const EcrimeFormAttachments: React.FC = () => (
+const EcrimeFormAttachmentsSection: React.FC = () => (
   <Stack gap="32px">
     <SectionHeader icon={AttachFileIcon} title="Attachments" />
     <Typography variant="body2">
@@ -32,4 +32,4 @@ const EcrimeFormAttachments: React.FC = () => (
   </Stack>
 );
 
-export default EcrimeFormAttachments;
+export default EcrimeFormAttachmentsSection;

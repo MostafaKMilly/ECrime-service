@@ -11,11 +11,11 @@ import {
 } from "@mui/material";
 import { Delete as DeleteIcon, Edit as EditIcon } from "@mui/icons-material";
 import { useFormikContext } from "formik";
-import { Accused } from "./types/Accused.type";
-import EcrimeAccusedDialog from "./EcrimeAccusedDialog";
-import { SectionHeader } from "../../../../shared/components";
+import { Accused } from "../types/Accused.type";
+import EcrimeAccusedDialog from "../EcrimeAccusedDialog";
+import { SectionHeader } from "../../../../../shared/components";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
-import { EcrimeFormValues } from "./types/EcrimeForm.type";
+import { EcrimeFormValues } from "../types/EcrimeForm.type";
 
 const EcrimeDetailsOfAccusedSection: React.FC = () => {
   const { values, setFieldValue } = useFormikContext<EcrimeFormValues>();

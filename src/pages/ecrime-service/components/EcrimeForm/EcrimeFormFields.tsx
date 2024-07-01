@@ -1,18 +1,20 @@
 import React from "react";
+import FormSelect from "../../../../shared/components/FormSelect";
 import { Checkbox, FormControlLabel, MenuItem, Stack } from "@mui/material";
 import { Field, ErrorMessage, useFormikContext } from "formik";
-import EcrimeFormGovernmentEntityDetails from "./EcrimeFormGovernmentEntityDetails";
-import EcrimeFormComplainantDetails from "./EcrimeFormComplainantDetails";
-import EcrimeFormComplaintDetails from "./EcrimeFormComplaintDetails";
-import EcrimeFormFinancialLosses from "./EcrimeFormFinancialLosses";
-import EcrimeFormAttachments from "./EcrimeFormAttachments";
-import FormSelect from "../../../../shared/components/FormSelect";
-import EcrimeFormPersonal from "./EcrimeFormPersonal";
-import EcrimeContactSection from "./EcrimeContactSection";
-import EcrimeFederalEntityDetails from "./EcrimeFederalEntityDetails";
-import EcrimePrivateEntityDetails from "./EcrimePrivateEntityDetails";
 import { EcrimeFormValues } from "./types/EcrimeForm.type";
-import EcrimeDetailsOfAccusedSection from "./EcrimeDetailsOfAccusedSection";
+import {
+  EcrimeContactSection,
+  EcrimeDetailsOfAccusedSection,
+  EcrimeFederalEntityDetailsSection,
+  EcrimeFormAttachmentsSection,
+  EcrimeFormComplainantDetailsSection,
+  EcrimeFormComplaintDetailsSection,
+  EcrimeFormFinancialLossesSection,
+  EcrimeFormGovernmentEntityDetailsSection,
+  EcrimeFormPersonalSection,
+  EcrimePrivateEntityDetailsSection,
+} from "./sections";
 
 const EcrimeFormFields: React.FC = () => {
   const { values } = useFormikContext<EcrimeFormValues>();
@@ -22,29 +24,29 @@ const EcrimeFormFields: React.FC = () => {
       case "Personal":
         return (
           <>
-            <EcrimeFormPersonal />
+            <EcrimeFormPersonalSection />
             <EcrimeContactSection />
           </>
         );
       case "Federal Entity":
         return (
           <>
-            <EcrimeFederalEntityDetails />
-            <EcrimeFormComplainantDetails />
+            <EcrimeFederalEntityDetailsSection />
+            <EcrimeFormComplainantDetailsSection />
           </>
         );
       case "Private Entity":
         return (
           <>
-            <EcrimePrivateEntityDetails />
-            <EcrimeFormComplainantDetails />
+            <EcrimePrivateEntityDetailsSection />
+            <EcrimeFormComplainantDetailsSection />
           </>
         );
       case "Local Government Entity":
         return (
           <>
-            <EcrimeFormGovernmentEntityDetails />
-            <EcrimeFormComplainantDetails />
+            <EcrimeFormGovernmentEntityDetailsSection />
+            <EcrimeFormComplainantDetailsSection />
           </>
         );
       default:
@@ -64,10 +66,10 @@ const EcrimeFormFields: React.FC = () => {
       </FormSelect>
 
       {renderComplainantDetails()}
-      <EcrimeFormComplaintDetails />
-      <EcrimeFormAttachments />
+      <EcrimeFormComplaintDetailsSection />
+      <EcrimeFormAttachmentsSection />
       <EcrimeDetailsOfAccusedSection />
-      <EcrimeFormFinancialLosses />
+      <EcrimeFormFinancialLossesSection />
 
       <Stack gap="32px">
         <FormControlLabel

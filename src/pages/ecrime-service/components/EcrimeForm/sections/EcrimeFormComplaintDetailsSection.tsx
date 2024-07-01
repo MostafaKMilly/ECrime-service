@@ -1,8 +1,8 @@
 import { Stack } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { FormField, SectionHeader } from "../../../../shared/components";
+import { FormField, SectionHeader } from "../../../../../shared/components";
 
-const EcrimeFormComplaintDetails: React.FC = () => (
+const EcrimeFormComplaintDetailsSection: React.FC = () => (
   <Stack gap="32px">
     <SectionHeader icon={AccountCircleIcon} title="Details of the Complaint" />
     <FormField
@@ -19,4 +19,4 @@ const EcrimeFormComplaintDetails: React.FC = () => (
   </Stack>
 );
 
-export default EcrimeFormComplaintDetails;
+export default EcrimeFormComplaintDetailsSection;

@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 
-import { FormField, SectionHeader } from "../../../../shared/components";
+import { FormField, SectionHeader } from "../../../../../shared/components";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PhoneIphoneOutlinedIcon from "@mui/icons-material/PhoneIphoneOutlined";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";

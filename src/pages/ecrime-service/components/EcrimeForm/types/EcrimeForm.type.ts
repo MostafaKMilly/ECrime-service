@@ -48,5 +48,6 @@ export interface EcrimeFormValues {
   ownerName?: string;
   expiryDate?: string;
   hasBranches?: boolean;
+  hasFinancialLosses?: boolean;
   companyContactNumber?: string;
 }
