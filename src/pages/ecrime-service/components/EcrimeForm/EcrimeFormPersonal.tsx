@@ -1,102 +1,146 @@
-import { useState } from "react";
-import { Field, FieldProps, ErrorMessage } from "formik";
-import {
-  Radio,
-  RadioGroup,
-  FormControl,
-  FormControlLabel,
-  MenuItem,
-  Stack,
-  Typography,
-} from "@mui/material";
+import React, { useEffect } from "react";
+import { Field, FieldProps, getIn, useFormikContext } from "formik";
+import { MenuItem, Stack } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import InputMask from "react-input-mask";
 import {
   FormField,
   FormSelect,
+  GenericTextField,
+  RadioField,
   SectionHeader,
 } from "../../../../shared/components";
+import { EcrimeFormValues } from "./types/EcrimeForm.type";
+import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
+import ImportContactsOutlinedIcon from "@mui/icons-material/ImportContactsOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 
 const EcrimeFormPersonal: React.FC = () => {
-  const [hasIdentity, setHasIdentity] = useState<boolean | null>(null);
+  const { values, setFieldValue } = useFormikContext<EcrimeFormValues>();
+
+  useEffect(() => {
+    setFieldValue("personal.hasIdentity", true);
+  }, [setFieldValue]);
 
   return (
     <Stack gap="32px">
       <SectionHeader icon={AccountCircleIcon} title="Personal" />
 
-      <FormControl
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-        }}
-      >
-        <Typography
-          variant="subtitle1"
-          component="legend"
-          sx={{ width: "25%" }}
-        >
-          Do you have Identity?
-        </Typography>
-        <Field name="hasIdentity">
-          {({ field }: FieldProps<string>) => (
-            <RadioGroup
-              {...field}
-              row
-              onChange={(event) => {
-                setHasIdentity(event.target.value === "true");
-                field.onChange(event);
-              }}
-            >
-              <FormControlLabel value="true" control={<Radio />} label="Yes" />
-              <FormControlLabel value="false" control={<Radio />} label="No" />
-            </RadioGroup>
-          )}
-        </Field>
-      </FormControl>
+      <RadioField
+        name="personal.hasIdentity"
+        label="Do you have Identity?"
+        options={[
+          { value: "true", label: "Yes" },
+          { value: "false", label: "No" },
+        ]}
+        row
+        defaultChecked
+        onChange={(value) =>
+          setFieldValue("personal.hasIdentity", value === "true")
+        }
+      />
 
-      {hasIdentity === true && (
+      {values.personal?.hasIdentity && (
         <>
+          <Field name="personal.emiratesId">
+            {({ field, form }: FieldProps<string>) => (
+              <InputMask
+                {...field}
+                mask="999-9999-9999999-9"
+                maskChar={null}
+                onChange={(e: { target: { value: string } }) =>
+                  form.setFieldValue("personal.emiratesId", e.target.value)
+                }
+              >
+                {
+                  (() => {
+                    return (
+                      <GenericTextField
+                        label="Emirates ID"
+                        placeholder="XXX-XXXX-XXXXXXX-X"
+                        required
+                        fullWidth
+                        icon={CreditCardOutlinedIcon}
+                        error={Boolean(
+                          getIn(form.errors, "personal.emiratesId") &&
+                            getIn(form.touched, "personal.emiratesId")
+                        )}
+                        helperText={
+                          getIn(form.errors, "personal.emiratesId") &&
+                          getIn(form.touched, "personal.emiratesId")
+                            ? (getIn(
+                                form.errors,
+                                "personal.emiratesId"
+                              ) as string)
+                            : ""
+                        }
+                      />
+                    );
+                  }) as unknown as React.ReactNode
+                }
+              </InputMask>
+            )}
+          </Field>
           <FormField
-            name="emiratesId"
-            label="Emirates ID"
-            placeholder="XXX-XXXX-XXXXXXX-X"
+            name="personal.address"
+            label="Address"
             required
+            icon={ImportContactsOutlinedIcon}
           />
-          <FormField name="address" label="Address" required />
         </>
       )}
 
-      {hasIdentity === false && (
+      {!values.personal?.hasIdentity && (
         <>
-          <FormField name="firstName" label="First Name" required />
-          <FormField name="middleName" label="Middle Name" />
-          <FormField name="surname" label="Surname" required />
-          <FormSelect name="gender" label="Gender" required>
+          <FormField
+            name="personal.firstName"
+            label="First Name"
+            required
+            icon={PersonOutlineOutlinedIcon}
+          />
+          <FormField
+            name="personal.middleName"
+            label="Middle Name"
+            icon={PersonOutlineOutlinedIcon}
+          />
+          <FormField
+            name="personal.surname"
+            label="Surname"
+            required
+            icon={PersonOutlineOutlinedIcon}
+          />
+          <FormSelect name="personal.gender" label="Gender" required>
             <MenuItem value="">Choose</MenuItem>
             <MenuItem value="male">Male</MenuItem>
             <MenuItem value="female">Female</MenuItem>
             <MenuItem value="other">Other</MenuItem>
           </FormSelect>
-          <ErrorMessage name="gender">
-            {(msg) => <div style={{ color: "red" }}>{msg}</div>}
-          </ErrorMessage>
-          <FormSelect name="nationality" label="Nationality" required>
+
+          <FormSelect name="personal.nationality" label="Nationality" required>
             <MenuItem value="">Choose</MenuItem>
             <MenuItem value="uae">UAE</MenuItem>
             <MenuItem value="other">Other</MenuItem>
           </FormSelect>
-          <ErrorMessage name="nationality">
-            {(msg) => <div style={{ color: "red" }}>{msg}</div>}
-          </ErrorMessage>
+
           <FormField
-            name="dateOfBirth"
+            name="personal.dateOfBirth"
             label="Date Of Birth"
             placeholder="Date Of Birth"
             required
             type="date"
           />
-          <FormField name="passportNo" label="Passport No" required />
-          <FormField name="address" label="Address" required />
+          <FormField
+            name="personal.passportNo"
+            label="Passport No"
+            required
+            icon={ImportContactsOutlinedIcon}
+          />
+          <FormField
+            name="personal.address"
+            label="Address"
+            required
+            icon={ImportContactsOutlinedIcon}
+          />
         </>
       )}
     </Stack>

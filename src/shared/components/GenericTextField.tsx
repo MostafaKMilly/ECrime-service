@@ -63,7 +63,9 @@ const GenericTextField: React.FC<GenericTextFieldProps> = ({
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              {IconComponent && <IconComponent />}
+              {IconComponent && (
+                <IconComponent sx={{ width: "18px", height: "18px" }} />
+              )}
             </InputAdornment>
           ),
         }}

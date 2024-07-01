@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, FieldProps } from "formik";
+import { Field, FieldProps, getIn } from "formik";
 import { Box } from "@mui/material";
 import GenericSelect from "./GenericSelect";
 
@@ -18,26 +18,22 @@ const FormSelect: React.FC<FormSelectProps> = ({
 }) => (
   <Box>
     <Field name={name}>
-      {({ field, form }: FieldProps<string>) => (
-        <GenericSelect
-          {...field}
-          label={label}
-          required={required}
-          fullWidth
-          error={
-            form.errors[name] && form.touched[name]
-              ? !!form.errors[name]
-              : false
-          }
-          helperText={
-            form.errors[name] && form.touched[name]
-              ? (form.errors[name] as string)
-              : ""
-          }
-        >
-          {children}
-        </GenericSelect>
-      )}
+      {({ field, form }: FieldProps<string>) => {
+        const error = getIn(form.errors, name);
+        const touch = getIn(form.touched, name);
+        return (
+          <GenericSelect
+            {...field}
+            label={label}
+            required={required}
+            fullWidth
+            error={Boolean(error && touch)}
+            helperText={error && touch ? (error as string) : ""}
+          >
+            {children}
+          </GenericSelect>
+        );
+      }}
     </Field>
   </Box>
 );
