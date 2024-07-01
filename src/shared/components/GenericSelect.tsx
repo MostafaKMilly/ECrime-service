@@ -4,6 +4,8 @@ import {
   Select,
   InputAdornment,
   SelectProps,
+  FormHelperText,
+  Stack,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -29,6 +31,7 @@ type GenericSelectProps = SelectProps & {
   label: string;
   required?: boolean;
   icon?: React.ElementType;
+  helperText?: string;
 };
 
 const GenericSelect: React.FC<GenericSelectProps> = ({
@@ -36,6 +39,7 @@ const GenericSelect: React.FC<GenericSelectProps> = ({
   required = false,
   icon: IconComponent,
   children,
+  helperText,
   ...props
 }) => {
   return (
@@ -62,22 +66,29 @@ const GenericSelect: React.FC<GenericSelectProps> = ({
         {required && <span style={{ color: "red" }}>*</span>}
       </Typography>
 
-      <StyledSelect
-        {...props}
-        variant="standard"
-        MenuProps={{
-          disableScrollLock: true,
-        }}
-        endAdornment={
-          IconComponent && (
-            <InputAdornment position="end">
-              <IconComponent />
-            </InputAdornment>
-          )
-        }
-      >
-        {children}
-      </StyledSelect>
+      <Stack gap={"4px"} width={"100%"}>
+        <StyledSelect
+          {...props}
+          variant="standard"
+          MenuProps={{
+            disableScrollLock: true,
+          }}
+          endAdornment={
+            IconComponent && (
+              <InputAdornment position="end">
+                <IconComponent />
+              </InputAdornment>
+            )
+          }
+        >
+          {children}
+        </StyledSelect>
+        {helperText && (
+          <FormHelperText sx={{ color: "error.main" }}>
+            {helperText}
+          </FormHelperText>
+        )}
+      </Stack>
     </Box>
   );
 };

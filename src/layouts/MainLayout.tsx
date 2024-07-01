@@ -8,7 +8,14 @@ const MainLayout: React.FC<PropsWithChildren> = ({ children }) => {
     <Box height={"100%"}>
       <CssBaseline />
       <Header />
-      <Box component="main" height={"100%"}>
+      <Box
+        component="main"
+        height={"100%"}
+        mt={{
+          xs: "90px",
+          sm: "170px",
+        }}
+      >
         {children}
       </Box>
     </Box>

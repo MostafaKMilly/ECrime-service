@@ -16,4 +16,5 @@ export const initialValues: EcrimeFormValues = {
   financialLosses: false,
   acceptTerms: false,
   captcha: "",
+  accusedList: [],
 };

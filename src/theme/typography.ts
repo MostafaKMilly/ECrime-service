@@ -16,7 +16,7 @@ const typography: TypographyOptions = {
   h1: {
     fontFamily: SECONDRY_FONT,
     fontWeight: "bold",
-    fontSize: 30,
+    fontSize: 38,
   },
   h2: {
     fontFamily: SECONDRY_FONT,

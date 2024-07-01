@@ -9,7 +9,6 @@ import { MenuItemStylesOverrides } from "./MenuItem";
 import { AvatarStylesOverrides } from "./Avatar";
 import { ContainerStylesOverrides } from "./container";
 import { DialogStylesOverrides } from "./Dialog";
-import { ChipStylesOverrides } from "./Chip";
 
 export const componentOverrides: Components<Theme> = {
   MuiAvatar: AvatarStylesOverrides,
@@ -22,5 +21,4 @@ export const componentOverrides: Components<Theme> = {
   MuiMenuItem: MenuItemStylesOverrides,
   MuiContainer: ContainerStylesOverrides,
   MuiDialog: DialogStylesOverrides,
-  MuiChip: ChipStylesOverrides,
 };

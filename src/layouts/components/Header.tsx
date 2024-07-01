@@ -10,32 +10,40 @@ import { Button, Chip, useTheme } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import AccessibleIcon from "@mui/icons-material/Accessible";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { NAVS } from "../data/navs";
 
 const Header: React.FC = () => {
   const [showSection, setShowSection] = useState(true);
   const theme = useTheme();
+  const [lastScrollTop, setLastScrollTop] = useState(0);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowSection(window.scrollY <= 5);
+      const currentScrollTop = window.scrollY;
+      if (currentScrollTop < lastScrollTop) {
+        setShowSection(true);
+      } else {
+        setShowSection(false);
+      }
+      setLastScrollTop(currentScrollTop);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [lastScrollTop]);
 
   return (
-    <AppBar position="sticky" color="transparent" elevation={0}>
+    <AppBar position="fixed" color="transparent" elevation={0}>
       <Toolbar
         sx={{
           background: "white",
-          boxShadow: showSection ? "none" : "0 4px 8px rgba(0, 0, 0, 0.04)",
+          boxShadow: showSection ? "none" : "0 4px 8px rgba(0,0,0,0.04)",
           px: { xs: "24px", md: "32px" },
           pt: "24px",
-          pb: { xs: "24px", md: "8px" },
+          pb: { xs: "24px", md: "0px" },
         }}
       >
         <Box
@@ -97,10 +105,15 @@ const Header: React.FC = () => {
             visibility: showSection ? "visible" : "hidden",
             transition:
               "max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease",
-            overflow: "hidden",
           }}
         >
-          <Toolbar sx={{ px: "32px", background: "white" }}>
+          <Toolbar
+            sx={{
+              px: "32px",
+              background: "white",
+              boxShadow: "0 4px 8px rgba(0,0,0,0.04)",
+            }}
+          >
             <Box
               sx={{
                 display: "flex",
@@ -118,13 +131,7 @@ const Header: React.FC = () => {
                   <MenuIcon />
                 </IconButton>
                 <Box display={{ xs: "none", lg: "flex" }}>
-                  {[
-                    "Home",
-                    "About Us",
-                    "Open Data",
-                    "Application Status",
-                    "Help & Support",
-                  ].map((text) => (
+                  {NAVS.map((text) => (
                     <MenuButton
                       key={text}
                       color="inherit"
@@ -137,12 +144,20 @@ const Header: React.FC = () => {
               </Box>
               <Box sx={{ display: "flex", alignItems: "center", gap: "15px" }}>
                 <Chip icon={<SearchIcon />} label="Search..." clickable />
-                <Chip icon={<AccessibleIcon />} clickable />
-                <Chip label="العربية" clickable />
+                <Chip
+                  icon={
+                    <AccessibleIcon
+                      sx={{ mr: "-17px !important", color: "#000" }}
+                    />
+                  }
+                  clickable
+                />
+                <Chip label="العربية" clickable sx={{ color: "#000" }} />
                 <Chip
                   label="Login"
-                  icon={<AccountCircleOutlinedIcon />}
+                  icon={<AccountCircleOutlinedIcon sx={{ color: "#000" }} />}
                   clickable
+                  sx={{ color: "#000" }}
                 />
               </Box>
             </Box>
