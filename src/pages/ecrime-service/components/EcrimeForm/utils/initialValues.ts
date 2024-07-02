@@ -21,6 +21,7 @@ export const initialValues: EcrimeFormValues = {
   expiryDate: "",
   firstName: "",
   gender: "",
+  activityType: "",
   hasBranches: null,
   issueDate: "",
   nationality: "",
@@ -31,5 +32,4 @@ export const initialValues: EcrimeFormValues = {
   actualLosses: "",
   paymentMethod: [],
   entityAddress: "",
-  
 };

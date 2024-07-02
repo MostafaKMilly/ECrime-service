@@ -9,7 +9,8 @@ import { formatFormValue } from "../../../../shared/utils/formatFormValues";
 
 const EcrimeForm = () => {
   const handleSubmit = (values: EcrimeFormValues) => {
-    console.log("Form values", formatFormValue(values));
+    alert(JSON.stringify(formatFormValue(values)));
+    console.log(formatFormValue(values));
   };
 
   return (

@@ -50,7 +50,10 @@ export const validationSchema = Yup.object().shape({
     otherwise: (schema) => schema.notRequired(),
   }),
   mobileNumber: Yup.string()
-    .matches(/^971\d{9}$/, "Invalid mobile number")
+    .matches(
+      /^971\d{9}$/,
+      "Invalid mobile number. Must start with '971' and followed by 9 digits."
+    )
     .required("Required"),
   landlineNumber: Yup.string().notRequired(),
   workNumber: Yup.string().notRequired(),
@@ -66,14 +69,20 @@ export const validationSchema = Yup.object().shape({
     otherwise: (schema) => schema.notRequired(),
   }),
   contactNumber: Yup.string()
-    .matches(/^971\d{7,9}$/, "Invalid contact number")
+    .matches(
+      /^971\d{7,9}$/,
+      "Invalid contact number. Must start with '971' and followed by 7 to 9 digits."
+    )
     .when("complainantType", {
       is: (type: string) => type !== "Personal",
       then: (schema) => schema.required("Required"),
       otherwise: (schema) => schema.notRequired(),
     }),
   fax: Yup.string()
-    .matches(/^971\d{7,9}$/, "Invalid fax number")
+    .matches(
+      /^971\d{7,9}$/,
+      "Invalid fax number. Must start with '971' and followed by 7 to 9 digits."
+    )
     .notRequired(),
   tradingLicenseNumber: Yup.string().when("complainantType", {
     is: "Private Entity",

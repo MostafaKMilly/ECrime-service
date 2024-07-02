@@ -34,7 +34,7 @@ export interface EcrimeFormValues {
   captcha: string;
   accusedList: Accused[];
   tradingLicenseNumber: string;
-  activityType?: string;
+  activityType: string;
   issueDate: string;
   companyName: string;
   entityAddress: string;

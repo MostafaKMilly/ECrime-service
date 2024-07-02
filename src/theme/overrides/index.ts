@@ -6,12 +6,9 @@ import { MuiFormHelperTextOverrides } from "./FormHelperText";
 import { MuiIconButtonOverrides } from "./IconButton";
 import { MenuStylesOverrides } from "./Menu";
 import { MenuItemStylesOverrides } from "./MenuItem";
-import { AvatarStylesOverrides } from "./Avatar";
-import { ContainerStylesOverrides } from "./container";
 import { DialogStylesOverrides } from "./Dialog";
 
 export const componentOverrides: Components<Theme> = {
-  MuiAvatar: AvatarStylesOverrides,
   MuiCssBaseline: CssBaselineOverrides,
   MuiFormLabel: MuiFormLableOverrides,
   MuiButton: ButtonStylesOverrides,
@@ -19,6 +16,5 @@ export const componentOverrides: Components<Theme> = {
   MuiIconButton: MuiIconButtonOverrides,
   MuiMenu: MenuStylesOverrides,
   MuiMenuItem: MenuItemStylesOverrides,
-  MuiContainer: ContainerStylesOverrides,
   MuiDialog: DialogStylesOverrides,
 };
