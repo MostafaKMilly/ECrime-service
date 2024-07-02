@@ -37,9 +37,6 @@ Start the development server:
 ```bash
 npm dev
 ```
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ---
 
 For more details, refer to the project files.
