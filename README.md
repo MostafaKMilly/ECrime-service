@@ -9,6 +9,7 @@ A web application for managing Ecrime, using Formik for form management and Yup 
 - File upload and validation
 - Captcha validation
 - Terms and conditions agreement
+- Responsive design
 
 ## Installation
 
