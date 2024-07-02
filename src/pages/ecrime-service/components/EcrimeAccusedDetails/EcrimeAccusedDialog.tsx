@@ -13,10 +13,9 @@ import {
   Stack,
   Typography,
   MenuItem,
-  Box,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { Formik, Form, Field, FieldArray } from "formik";
+import { Formik, Form, Field } from "formik";
 import {
   FormField,
   FormSelect,
@@ -26,8 +25,7 @@ import { Accused } from "./types/Accused.type";
 import { accusedFormValidationSchema } from "./utils/accusedFormValidationSchema";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import CancelIcon from "@mui/icons-material/Cancel";
+import WebsiteDetailsForm from "./WebsiteDetailsForm";
 
 interface EcrimeAccusedDialogProps {
   open: boolean;
@@ -169,74 +167,7 @@ const EcrimeAccusedDialog: React.FC<EcrimeAccusedDialogProps> = ({
                   ]}
                 />
                 {values.websiteDetails && (
-                  <FieldArray name="websites">
-                    {({ push, remove }) => (
-                      <Box
-                        sx={{
-                          border: "3px dashed #ccc",
-                          padding: "20px",
-                          borderRadius: "10px",
-                          marginTop: "16px",
-                        }}
-                      >
-                        <Typography variant="subtitle1" gutterBottom>
-                          Website Details
-                        </Typography>
-                        {values.websites.map((website, index) => (
-                          <Stack
-                            key={index}
-                            direction="column"
-                            spacing={2}
-                            marginBottom={2}
-                          >
-                            <Stack
-                              direction="row"
-                              spacing={2}
-                              width="100%"
-                              alignItems={"center"}
-                            >
-                              <FormField
-                                name={`websites[${index}].type`}
-                                label="Type"
-                                required
-                              />
-                              <FormField
-                                name={`websites[${index}].name`}
-                                label="Name"
-                              />
-                            </Stack>
-                            <FormField
-                              name={`websites[${index}].url`}
-                              label="URL"
-                              required
-                            />
-                            <FormField
-                              name={`websites[${index}].note`}
-                              label="Note"
-                              required
-                            />
-                            <IconButton
-                              onClick={() => remove(index)}
-                              size="small"
-                              sx={{ alignSelf: "flex-end" }}
-                            >
-                              <CancelIcon sx={{ color: "error.main" }} />
-                            </IconButton>
-                          </Stack>
-                        ))}
-                        <Button
-                          variant="outlined"
-                          color="secondary"
-                          onClick={() =>
-                            push({ type: "", name: "", url: "", note: "" })
-                          }
-                          startIcon={<AddOutlinedIcon />}
-                        >
-                          Add Website
-                        </Button>
-                      </Box>
-                    )}
-                  </FieldArray>
+                  <WebsiteDetailsForm websites={values.websites} />
                 )}
               </Stack>
             </DialogContent>

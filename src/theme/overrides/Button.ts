@@ -38,7 +38,6 @@ export const ButtonStylesOverrides: Components<
         boxShadow: "none !important",
         transition: "all 300ms linear",
         letterSpacing: "0",
-        marginRight: "0 !important",
         "&:hover": {
           backgroundColor: "#f5f5f5 !important",
         },
@@ -78,7 +77,6 @@ export const ButtonStylesOverrides: Components<
     {
       props: {
         variant: "contained",
-        color: "primary",
       },
       style: {
         padding: "0 20px !important",
@@ -87,7 +85,6 @@ export const ButtonStylesOverrides: Components<
         fontSize: "14px",
         minWidth: "119px",
         borderRadius: "56px !important",
-        background: "#008755 !important",
         textTransform: "none",
         fontFamily: '"Bukrabold"',
         boxShadow: "none !important",
@@ -100,15 +97,21 @@ export const ButtonStylesOverrides: Components<
         position: "relative",
         animationDuration: "500ms",
         animationDelay: "400ms",
-        "&:hover": {
-          backgroundColor: "#007547 !important",
-        },
+
         "& .MuiButton-startIcon , .MuiButton-endIcon": {
           padding: 4,
           "& svg": {
             fontSize: "medium",
           },
         },
+      },
+    },
+    {
+      props: {
+        size: "small",
+      },
+      style: {
+        maxHeight: "36px",
       },
     },
   ],

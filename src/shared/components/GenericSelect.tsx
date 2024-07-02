@@ -53,7 +53,7 @@ const GenericSelect: React.FC<GenericSelectProps> = ({
         md: "center",
       }}
       flexDirection={{ xs: "column", md: "row" }}
-      sx={{ columnGap: "24px" }}
+      sx={{ columnGap: "24px", width: "100%" }}
     >
       <Typography
         variant="subtitle1"

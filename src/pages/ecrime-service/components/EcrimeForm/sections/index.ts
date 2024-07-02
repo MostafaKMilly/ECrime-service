@@ -1,5 +1,5 @@
 export { default as EcrimeContactSection } from "./EcrimeContactSection";
-export { default as EcrimeDetailsOfAccusedSection } from "./EcrimeDetailsOfAccusedSection";
+export { default as EcrimeDetailsOfAccusedSection } from "../../EcrimeAccusedDetails/EcrimeAccusedDetails";
 export { default as EcrimeFederalEntityDetailsSection } from "./EcrimeFederalEntityDetailsSection";
 export { default as EcrimeFormComplainantDetailsSection } from "./EcrimeFormComplainantDetailsSection";
 export { default as EcrimeFormComplaintDetailsSection } from "./EcrimeFormComplaintDetailsSection";

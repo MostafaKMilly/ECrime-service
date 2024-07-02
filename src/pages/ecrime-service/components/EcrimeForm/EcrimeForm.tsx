@@ -5,7 +5,7 @@ import { initialValues } from "./utils/initialValues";
 import { validationSchema } from "./utils/validationSchema";
 import EcrimeFormFields from "./EcrimeFormFields";
 import { EcrimeFormValues } from "./types/EcrimeForm.type";
-import { formatFormValue } from "./utils/formatFormValues";
+import { formatFormValue } from "../../../../shared/utils/formatFormValues";
 
 const EcrimeForm = () => {
   const handleSubmit = (values: EcrimeFormValues) => {

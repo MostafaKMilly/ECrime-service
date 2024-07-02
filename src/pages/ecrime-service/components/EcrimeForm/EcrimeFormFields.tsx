@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import FormSelect from "../../../../shared/components/FormSelect";
-import { Checkbox, FormControlLabel, MenuItem, Stack } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  MenuItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Field, ErrorMessage, useFormikContext } from "formik";
 import { EcrimeFormValues } from "./types/EcrimeForm.type";
 import {
@@ -15,9 +21,12 @@ import {
   EcrimePrivateEntityDetailsSection,
 } from "./sections";
 import { Attachments } from "../Attachments";
+import TermsAndConditionsDialog from "../../../../shared/components/TermsAndConditionsDialog";
+import { Captcha } from "../Captcha";
 
 const EcrimeFormFields: React.FC = () => {
   const { values } = useFormikContext<EcrimeFormValues>();
+  const [termsDialogOpen, setTermsDialogOpen] = useState(false);
 
   const renderComplainantDetails = () => {
     switch (values.complainantType) {
@@ -72,23 +81,35 @@ const EcrimeFormFields: React.FC = () => {
       <EcrimeDetailsOfAccusedSection />
       <EcrimeFormFinancialLossesSection />
 
-      <Stack gap="32px">
+      <Stack gap="8px">
         <FormControlLabel
           control={<Field name="acceptTerms" type="checkbox" as={Checkbox} />}
-          label="I accept the Terms and Conditions"
+          label={
+            <>
+              I accept the{" "}
+              <Typography
+                component="span"
+                sx={{ fontWeight: 600, cursor: "pointer" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setTermsDialogOpen(true);
+                }}
+              >
+                Terms and Conditions
+              </Typography>
+            </>
+          }
         />
         <ErrorMessage name="acceptTerms">
           {(msg) => <div style={{ color: "red" }}>{msg}</div>}
         </ErrorMessage>
       </Stack>
+      <Captcha />
 
-      <FormSelect name="captcha" label="Select captcha image" required>
-        <MenuItem value="captcha1">Captcha 1</MenuItem>
-        <MenuItem value="captcha2">Captcha 2</MenuItem>
-        <MenuItem value="captcha3">Captcha 3</MenuItem>
-        <MenuItem value="captcha4">Captcha 4</MenuItem>
-        <MenuItem value="captcha5">Captcha 5</MenuItem>
-      </FormSelect>
+      <TermsAndConditionsDialog
+        open={termsDialogOpen}
+        onClose={() => setTermsDialogOpen(false)}
+      />
     </Stack>
   );
 };

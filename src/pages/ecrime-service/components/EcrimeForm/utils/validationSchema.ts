@@ -136,5 +136,7 @@ export const validationSchema = Yup.object().shape({
     otherwise: (schema) => schema.notRequired(),
   }),
   acceptTerms: Yup.boolean().oneOf([true], "Accept Terms is required"),
-  captcha: Yup.string().required("Required"),
+  captcha: Yup.string()
+    .oneOf(["chat"], "Please select proper icon")
+    .required("Required"),
 });

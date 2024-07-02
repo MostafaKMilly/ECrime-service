@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, FieldProps, getIn } from "formik";
-import { Box, TextFieldProps } from "@mui/material";
+import { TextFieldProps } from "@mui/material";
 import GenericTextField from "./GenericTextField";
 
 interface FormFieldProps extends TextFieldProps<"standard"> {
@@ -24,45 +24,43 @@ const FormField: React.FC<FormFieldProps> = ({
   onBlur,
   ...props
 }) => (
-  <Box>
-    <Field name={name}>
-      {({ field, form }: FieldProps<string>) => {
-        const error = getIn(form.errors, name);
-        const touch = getIn(form.touched, name);
+  <Field name={name}>
+    {({ field, form }: FieldProps<string>) => {
+      const error = getIn(form.errors, name);
+      const touch = getIn(form.touched, name);
 
-        const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-          field.onChange(event);
-          if (onChange) {
-            onChange(event);
-          }
-        };
+      const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        field.onChange(event);
+        if (onChange) {
+          onChange(event);
+        }
+      };
 
-        const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-          field.onBlur(event);
-          if (onBlur) {
-            onBlur(event);
-          }
-        };
+      const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+        field.onBlur(event);
+        if (onBlur) {
+          onBlur(event);
+        }
+      };
 
-        return (
-          <GenericTextField
-            {...field}
-            {...props}
-            label={label}
-            placeholder={placeholder}
-            required={required}
-            icon={icon}
-            type={type}
-            fullWidth
-            error={Boolean(error && touch)}
-            helperText={error && touch ? (error as string) : helperText}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-        );
-      }}
-    </Field>
-  </Box>
+      return (
+        <GenericTextField
+          {...field}
+          {...props}
+          label={label}
+          placeholder={placeholder}
+          required={required}
+          icon={icon}
+          type={type}
+          fullWidth
+          error={Boolean(error && touch)}
+          helperText={error && touch ? (error as string) : helperText}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+      );
+    }}
+  </Field>
 );
 
 export default FormField;

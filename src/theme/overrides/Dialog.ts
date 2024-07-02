@@ -8,7 +8,7 @@ export const DialogStylesOverrides: Components<Theme>["MuiDialog"] = {
   styleOverrides: {
     root: {
       "& .MuiBackdrop-root": {
-        background: "rgba(33,33,33,0.5) !important",
+        background: "rgba(0,0,0,0.8)",
         backdropFilter: "blur(4px)",
       },
     },

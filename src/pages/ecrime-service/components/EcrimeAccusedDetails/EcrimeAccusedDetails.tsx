@@ -7,17 +7,15 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  IconButton,
 } from "@mui/material";
-import { Delete as DeleteIcon, Edit as EditIcon } from "@mui/icons-material";
 import { useFormikContext } from "formik";
-import { Accused } from "../types/Accused.type";
-import EcrimeAccusedDialog from "../EcrimeAccusedDialog";
-import { SectionHeader } from "../../../../../shared/components";
+import { Accused } from "./types/Accused.type";
+import EcrimeAccusedDialog from "./EcrimeAccusedDialog";
+import { SectionHeader } from "../../../../shared/components";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
-import { EcrimeFormValues } from "../types/EcrimeForm.type";
+import { EcrimeFormValues } from "../EcrimeForm/types/EcrimeForm.type";
 
-const EcrimeDetailsOfAccusedSection: React.FC = () => {
+const EcrimeAccusedDetails: React.FC = () => {
   const { values, setFieldValue } = useFormikContext<EcrimeFormValues>();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editIndex, setEditIndex] = useState<number | undefined>(undefined);
@@ -72,7 +70,7 @@ const EcrimeDetailsOfAccusedSection: React.FC = () => {
       />
       {values.accusedList.length > 0 && (
         <Table>
-          <TableHead>
+          <TableHead sx={{ backgroundColor: "#f2f4f8", borderRadius: "8px" }}>
             <TableRow>
               <TableCell>#</TableCell>
               <TableCell>Full Name</TableCell>
@@ -87,18 +85,23 @@ const EcrimeDetailsOfAccusedSection: React.FC = () => {
                 <TableCell>{accused.fullName}</TableCell>
                 <TableCell>{accused.nationality}</TableCell>
                 <TableCell>
-                  <IconButton
-                    onClick={() => handleDeleteAccused(index)}
+                  <Button
+                    variant="outlined"
                     color="secondary"
+                    onClick={() => handleDeleteAccused(index)}
+                    sx={{ mr: 1 }}
+                    size="small"
                   >
-                    <DeleteIcon />
-                  </IconButton>
-                  <IconButton
+                    Delete
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
                     onClick={() => openEditDialog(index)}
-                    color="primary"
+                    size="small"
                   >
-                    <EditIcon />
-                  </IconButton>
+                    Edit
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -109,4 +112,4 @@ const EcrimeDetailsOfAccusedSection: React.FC = () => {
   );
 };
 
-export default EcrimeDetailsOfAccusedSection;
+export default EcrimeAccusedDetails;

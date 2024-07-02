@@ -1,4 +1,4 @@
-import { Accused } from "./Accused.type";
+import { Accused } from "../../EcrimeAccusedDetails/types/Accused.type";
 
 export interface EcrimeFormValues {
   complainantType:
