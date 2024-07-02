@@ -22,7 +22,7 @@ const EcrimeFormPersonalSection: React.FC = () => {
       <SectionHeader icon={AccountCircleIcon} title="Personal" />
 
       <RadioField
-        name="personal.hasIdentity"
+        name="hasIdentity"
         label="Do you have Identity?"
         options={[
           { value: true, label: "Yes" },
@@ -31,10 +31,10 @@ const EcrimeFormPersonalSection: React.FC = () => {
         required
       />
 
-      {values.personal?.hasIdentity && (
+      {values.hasIdentity && (
         <>
           <InputMaskField
-            name="personal.emiratesId"
+            name="emiratesId"
             label="Emirates ID"
             placeholder="XXX-XXXX-XXXXXXX-X"
             required
@@ -42,7 +42,7 @@ const EcrimeFormPersonalSection: React.FC = () => {
             mask="999-9999-9999999-9"
           />
           <FormField
-            name="personal.address"
+            name="address"
             label="Address"
             required
             icon={ImportContactsOutlinedIcon}
@@ -50,53 +50,53 @@ const EcrimeFormPersonalSection: React.FC = () => {
         </>
       )}
 
-      {!values.personal?.hasIdentity && (
+      {!values.hasIdentity && (
         <>
           <FormField
-            name="personal.firstName"
+            name="firstName"
             label="First Name"
             required
             icon={PersonOutlineOutlinedIcon}
           />
           <FormField
-            name="personal.middleName"
+            name="middleName"
             label="Middle Name"
             icon={PersonOutlineOutlinedIcon}
           />
           <FormField
-            name="personal.surname"
+            name="surname"
             label="Surname"
             required
             icon={PersonOutlineOutlinedIcon}
           />
-          <FormSelect name="personal.gender" label="Gender" required>
+          <FormSelect name="gender" label="Gender" required>
             <MenuItem value="">Choose</MenuItem>
             <MenuItem value="male">Male</MenuItem>
             <MenuItem value="female">Female</MenuItem>
             <MenuItem value="other">Other</MenuItem>
           </FormSelect>
 
-          <FormSelect name="personal.nationality" label="Nationality" required>
+          <FormSelect name="nationality" label="Nationality" required>
             <MenuItem value="">Choose</MenuItem>
             <MenuItem value="uae">UAE</MenuItem>
             <MenuItem value="other">Other</MenuItem>
           </FormSelect>
 
           <FormField
-            name="personal.dateOfBirth"
+            name="dateOfBirth"
             label="Date Of Birth"
             placeholder="Date Of Birth"
             required
             type="date"
           />
           <FormField
-            name="personal.passportNo"
+            name="passportNo"
             label="Passport No"
             required
             icon={ImportContactsOutlinedIcon}
           />
           <FormField
-            name="personal.address"
+            name="address"
             label="Address"
             required
             icon={ImportContactsOutlinedIcon}

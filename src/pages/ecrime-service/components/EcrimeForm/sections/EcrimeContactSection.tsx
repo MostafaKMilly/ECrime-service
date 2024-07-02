@@ -11,26 +11,26 @@ const EcrimeContactSection: React.FC = () => (
     <SectionHeader icon={AccountCircleIcon} title="How can we reach you?" />
 
     <FormField
-      name="personal.mobileNumber"
+      name="mobileNumber"
       label="Mobile Number"
       placeholder="971XXXXXXXXX"
       required
       icon={PhoneIphoneOutlinedIcon}
     />
     <FormField
-      name="personal.landlineNumber"
+      name="landlineNumber"
       label="Landline Number"
       placeholder="Ex: 9714xxxxxxx"
       icon={CallOutlinedIcon}
     />
     <FormField
-      name="personal.workNumber"
+      name="workNumber"
       label="Work Number"
       placeholder="Ex: 9714xxxxxxx"
       icon={CallOutlinedIcon}
     />
     <FormField
-      name="personal.email"
+      name="email"
       label="Email"
       placeholder="Ex: xyz@xyz.com"
       required

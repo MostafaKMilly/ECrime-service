@@ -62,6 +62,7 @@ const AutoCompleteField: React.FC<AutoCompleteFieldProps> = ({
               onChange={(_, value) => {
                 form.setFieldValue(name, value);
               }}
+              sx={{ width: "100%" }}
               renderTags={(value: string[], getTagProps) =>
                 value.map((option, index) => (
                   <Chip

@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-const StyledTextField = styled(TextField)(({ theme }) => ({
+const StyledTextField = styled(TextField)(({ theme, error }) => ({
   "& .MuiInput-underline:before": {
     borderBottomColor: theme.palette.success.main,
   },
@@ -17,6 +17,9 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
   "&.Mui-focused:before": {
     borderBottomColor: theme.palette.success.dark,
+  },
+  "& .MuiFormHelperText-root": {
+    color: error ? theme.palette.error.main : theme.palette.common.black,
   },
 }));
 

@@ -52,15 +52,15 @@ const EcrimeDetailsOfAccusedSection: React.FC = () => {
     <Stack gap="32px">
       <SectionHeader icon={PersonSearchIcon} title="Details of the Accused" />
       <Button
-        variant="contained"
-        color="primary"
+        variant="outlined"
+        color="secondary"
         onClick={() => {
           setInitialValues(undefined);
           setEditIndex(undefined);
           setDialogOpen(true);
         }}
       >
-        Add Details of the Accused
+        Details of the Accused
       </Button>
       <EcrimeAccusedDialog
         open={dialogOpen}

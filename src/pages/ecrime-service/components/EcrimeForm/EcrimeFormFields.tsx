@@ -7,7 +7,6 @@ import {
   EcrimeContactSection,
   EcrimeDetailsOfAccusedSection,
   EcrimeFederalEntityDetailsSection,
-  EcrimeFormAttachmentsSection,
   EcrimeFormComplainantDetailsSection,
   EcrimeFormComplaintDetailsSection,
   EcrimeFormFinancialLossesSection,
@@ -15,6 +14,7 @@ import {
   EcrimeFormPersonalSection,
   EcrimePrivateEntityDetailsSection,
 } from "./sections";
+import { Attachments } from "../Attachments";
 
 const EcrimeFormFields: React.FC = () => {
   const { values } = useFormikContext<EcrimeFormValues>();
@@ -28,13 +28,6 @@ const EcrimeFormFields: React.FC = () => {
             <EcrimeContactSection />
           </>
         );
-      case "Federal Entity":
-        return (
-          <>
-            <EcrimeFederalEntityDetailsSection />
-            <EcrimeFormComplainantDetailsSection />
-          </>
-        );
       case "Private Entity":
         return (
           <>
@@ -42,6 +35,14 @@ const EcrimeFormFields: React.FC = () => {
             <EcrimeFormComplainantDetailsSection />
           </>
         );
+      case "Federal Entity":
+        return (
+          <>
+            <EcrimeFederalEntityDetailsSection />
+            <EcrimeFormComplainantDetailsSection />
+          </>
+        );
+
       case "Local Government Entity":
         return (
           <>
@@ -56,7 +57,7 @@ const EcrimeFormFields: React.FC = () => {
 
   return (
     <Stack gap="34px">
-      <FormSelect name="complainantType" label="Complainant Type" required>
+      <FormSelect name="complainantType" label="Complainant Type">
         <MenuItem value="Personal">Personal</MenuItem>
         <MenuItem value="Private Entity">Private Entity</MenuItem>
         <MenuItem value="Local Government Entity">
@@ -67,7 +68,7 @@ const EcrimeFormFields: React.FC = () => {
 
       {renderComplainantDetails()}
       <EcrimeFormComplaintDetailsSection />
-      <EcrimeFormAttachmentsSection />
+      <Attachments />
       <EcrimeDetailsOfAccusedSection />
       <EcrimeFormFinancialLossesSection />
 
@@ -81,18 +82,13 @@ const EcrimeFormFields: React.FC = () => {
         </ErrorMessage>
       </Stack>
 
-      <Stack gap="32px">
-        <FormSelect name="captcha" label="Select captcha image" required>
-          <MenuItem value="captcha1">Captcha 1</MenuItem>
-          <MenuItem value="captcha2">Captcha 2</MenuItem>
-          <MenuItem value="captcha3">Captcha 3</MenuItem>
-          <MenuItem value="captcha4">Captcha 4</MenuItem>
-          <MenuItem value="captcha5">Captcha 5</MenuItem>
-        </FormSelect>
-        <ErrorMessage name="captcha">
-          {(msg) => <div style={{ color: "red" }}>{msg}</div>}
-        </ErrorMessage>
-      </Stack>
+      <FormSelect name="captcha" label="Select captcha image" required>
+        <MenuItem value="captcha1">Captcha 1</MenuItem>
+        <MenuItem value="captcha2">Captcha 2</MenuItem>
+        <MenuItem value="captcha3">Captcha 3</MenuItem>
+        <MenuItem value="captcha4">Captcha 4</MenuItem>
+        <MenuItem value="captcha5">Captcha 5</MenuItem>
+      </FormSelect>
     </Stack>
   );
 };

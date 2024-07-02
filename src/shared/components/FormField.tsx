@@ -1,9 +1,9 @@
 import React from "react";
 import { Field, FieldProps, getIn } from "formik";
-import { Box } from "@mui/material";
+import { Box, TextFieldProps } from "@mui/material";
 import GenericTextField from "./GenericTextField";
 
-interface FormFieldProps {
+interface FormFieldProps extends TextFieldProps<"standard"> {
   name: string;
   label: string;
   placeholder?: string;
@@ -19,15 +19,35 @@ const FormField: React.FC<FormFieldProps> = ({
   required,
   icon,
   type,
+  helperText,
+  onChange,
+  onBlur,
+  ...props
 }) => (
   <Box>
     <Field name={name}>
       {({ field, form }: FieldProps<string>) => {
         const error = getIn(form.errors, name);
         const touch = getIn(form.touched, name);
+
+        const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+          field.onChange(event);
+          if (onChange) {
+            onChange(event);
+          }
+        };
+
+        const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+          field.onBlur(event);
+          if (onBlur) {
+            onBlur(event);
+          }
+        };
+
         return (
           <GenericTextField
             {...field}
+            {...props}
             label={label}
             placeholder={placeholder}
             required={required}
@@ -35,7 +55,9 @@ const FormField: React.FC<FormFieldProps> = ({
             type={type}
             fullWidth
             error={Boolean(error && touch)}
-            helperText={error && touch ? (error as string) : ""}
+            helperText={error && touch ? (error as string) : helperText}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
         );
       }}

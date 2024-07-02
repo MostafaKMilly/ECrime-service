@@ -1,3 +1,10 @@
+export interface Website {
+  type: string;
+  name: string;
+  url: string;
+  note: string;
+}
+
 export interface Accused {
   fullName: string;
   nationality: string;
@@ -6,5 +13,6 @@ export interface Accused {
   address?: string;
   contactNo: string;
   email: string;
-  websiteDetails: string;
+  websiteDetails: boolean;
+  websites: Website[];
 }

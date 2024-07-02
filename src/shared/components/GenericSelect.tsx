@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-const StyledSelect = styled(Select)(({ theme }) => ({
+const StyledSelect = styled(Select)(({ theme, error }) => ({
   "& .MuiSelect-select": {
     borderColor: theme.palette.success.main,
     "&:focus": {
@@ -24,6 +24,9 @@ const StyledSelect = styled(Select)(({ theme }) => ({
   },
   "&.Mui-focused:before": {
     borderBottomColor: theme.palette.success.dark,
+  },
+  "& .MuiFormHelperText-root": {
+    color: error ? theme.palette.error.main : theme.palette.common.black,
   },
 }));
 

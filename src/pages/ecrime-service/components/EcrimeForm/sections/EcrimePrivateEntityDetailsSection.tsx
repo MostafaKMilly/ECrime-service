@@ -32,13 +32,13 @@ const EcrimePrivateEntityDetailsSection: React.FC = () => {
         ]}
       />
       <FormField
-        name="companyContactNumber"
+        name="contactNumber"
         label="Company Contact Number"
         placeholder="Ex: 9714xxxxxxx"
         required
       />
       <FormField name="fax" label="Fax" placeholder="Ex: 9714xxxxxxx" />
-      <FormField name="address" label="Address" required />
+      <FormField name="entityAddress" label="Address" required />
     </Stack>
   );
 };

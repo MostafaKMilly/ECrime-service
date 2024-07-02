@@ -1,14 +1,15 @@
-import { Paper, Button } from "@mui/material";
+import { Paper, Button, Box } from "@mui/material";
 import { Formik, Form } from "formik";
 import EcrimeFormStepper from "./EcrimeFormStepper";
 import { initialValues } from "./utils/initialValues";
 import { validationSchema } from "./utils/validationSchema";
 import EcrimeFormFields from "./EcrimeFormFields";
 import { EcrimeFormValues } from "./types/EcrimeForm.type";
+import { formatFormValue } from "./utils/formatFormValues";
 
 const EcrimeForm = () => {
   const handleSubmit = (values: EcrimeFormValues) => {
-    console.log("Form values", values);
+    console.log("Form values", formatFormValue(values));
   };
 
   return (
@@ -36,16 +37,25 @@ const EcrimeForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {() => (
+        {({ resetForm }) => (
           <Form
             style={{
               marginTop: "42px",
             }}
           >
             <EcrimeFormFields />
-            <Button type="submit" variant="contained" color="primary">
-              Submit
-            </Button>
+            <Box display={"flex"} alignItems={"center"} gap={"8px"} mt={4}>
+              <Button type="submit" variant="contained" color="primary">
+                Submit
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={() => resetForm()}
+              >
+                Clear
+              </Button>
+            </Box>
           </Form>
         )}
       </Formik>

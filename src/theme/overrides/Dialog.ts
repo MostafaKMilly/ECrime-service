@@ -8,36 +8,33 @@ export const DialogStylesOverrides: Components<Theme>["MuiDialog"] = {
   styleOverrides: {
     root: {
       "& .MuiBackdrop-root": {
-        background: "rgba(201, 201, 201, 0.06)",
-        backdropFilter: "blur(2px)",
+        background: "rgba(33,33,33,0.5) !important",
+        backdropFilter: "blur(4px)",
       },
     },
     paper: ({ theme }) => ({
       minWidth: "auto !important",
-      paddingBottom: 16,
-      borderRadius: 8,
+      padding: "40px",
       boxShadow: theme.shadows[2],
+      borderRadius: "22px !important",
       "& .MuiDialogTitle-root": {
-        paddingTop: 16,
-        paddingRight: 32,
-        paddingLeft: 32,
+        padding: 0,
         height: 60,
-        color: "#fff",
-        backgroundColor: theme.palette.primary.main,
+        color: "#000",
         ...theme.typography.h2,
         "& .MuiButtonBase-root": {
-          color: "#fff",
+          color: "#000",
+          top: "30px",
+          right: "27px",
         },
       },
       "& .MuiDialogContent-root": {
-        marginTop: 32,
-        paddingRight: 32,
-        paddingLeft: 32,
+        maxHeight: "520px",
+        padding: "0px",
+        paddingRight: "8px",
       },
       "& .MuiDialogActions-root": {
-        paddingRight: 32,
-        paddingLeft: 32,
-        paddingBottom: 0,
+        padding: "0px",
       },
     }),
     paperWidthMd: {

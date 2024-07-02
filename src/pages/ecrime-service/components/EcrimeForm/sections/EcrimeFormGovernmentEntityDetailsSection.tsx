@@ -6,13 +6,9 @@ import { FormField, SectionHeader } from "../../../../../shared/components";
 const EcrimeFormGovernmentEntityDetailsSection: React.FC = () => (
   <Stack gap="32px">
     <SectionHeader icon={AccountCircleIcon} title="Government Entity Details" />
+    <FormField name="entityName" label="Government Entity Name" required />
     <FormField
-      name="governmentEntityName"
-      label="Government Entity Name"
-      required
-    />
-    <FormField
-      name="governmentalContactNumber"
+      name="contactNumber"
       label="Governmental Contact Number"
       placeholder="Ex: 9714xxxxxxx"
       required
@@ -24,7 +20,7 @@ const EcrimeFormGovernmentEntityDetailsSection: React.FC = () => (
       placeholder="Ex: 9714xxxxxxx"
       icon={PhoneIcon}
     />
-    <FormField name="governmentAddress" label="Government Address" required />
+    <FormField name="entityAddress" label="Government Address" required />
   </Stack>
 );
 

@@ -7,7 +7,8 @@ const supportedFormats = [
   "image/png",
 ];
 
-const personalSchema = Yup.object().shape({
+export const validationSchema = Yup.object().shape({
+  complainantType: Yup.string().required("Required"),
   hasIdentity: Yup.boolean().default(true).required("Required"),
   emiratesId: Yup.string()
     .matches(/^\d{3}-\d{4}-\d{7}-\d$/, "Invalid Emirates ID")
@@ -54,100 +55,86 @@ const personalSchema = Yup.object().shape({
   landlineNumber: Yup.string().notRequired(),
   workNumber: Yup.string().notRequired(),
   email: Yup.string().email("Invalid email address").required("Required"),
-});
-
-export const validationSchema = Yup.object().shape({
-  complainantType: Yup.string().required("Required"),
-  governmentEntityName: Yup.string().when("complainantType", {
-    is: "Local Government Entity",
+  entityName: Yup.string().when("complainantType", {
+    is: (type: string) => type !== "Personal" && type !== "Private Entity",
     then: (schema) => schema.required("Required"),
+    otherwise: (schema) => schema.notRequired(),
   }),
-  governmentalContactNumber: Yup.string().when("complainantType", {
-    is: "Local Government Entity",
-    then: (schema) =>
-      schema
-        .matches(/^971\d{7,9}$/, "Invalid contact number")
-        .required("Required"),
-  }),
-  fax: Yup.string().when("complainantType", {
-    is: "Local Government Entity",
-    then: (schema) =>
-      schema.matches(/^971\d{7,9}$/, "Invalid fax number").notRequired(),
-  }),
-  governmentAddress: Yup.string().when("complainantType", {
-    is: "Local Government Entity",
+  entityAddress: Yup.string().when("complainantType", {
+    is: (type: string) => type !== "Personal",
     then: (schema) => schema.required("Required"),
+    otherwise: (schema) => schema.notRequired(),
   }),
-  federalEntityName: Yup.string().when("complainantType", {
-    is: "Federal Entity",
-    then: (schema) => schema.required("Required"),
-  }),
-  federalContactNumber: Yup.string().when("complainantType", {
-    is: "Federal Entity",
-    then: (schema) =>
-      schema
-        .matches(/^971\d{7,9}$/, "Invalid contact number")
-        .required("Required"),
-  }),
+  contactNumber: Yup.string()
+    .matches(/^971\d{7,9}$/, "Invalid contact number")
+    .when("complainantType", {
+      is: (type: string) => type !== "Personal",
+      then: (schema) => schema.required("Required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+  fax: Yup.string()
+    .matches(/^971\d{7,9}$/, "Invalid fax number")
+    .notRequired(),
   tradingLicenseNumber: Yup.string().when("complainantType", {
     is: "Private Entity",
     then: (schema) => schema.required("Required"),
+    otherwise: (schema) => schema.notRequired(),
   }),
   activityType: Yup.string().when("complainantType", {
     is: "Private Entity",
     then: (schema) => schema.required("Required"),
+    otherwise: (schema) => schema.notRequired(),
   }),
   issueDate: Yup.string().when("complainantType", {
     is: "Private Entity",
     then: (schema) => schema.required("Required"),
+    otherwise: (schema) => schema.notRequired(),
   }),
   companyName: Yup.string().when("complainantType", {
     is: "Private Entity",
     then: (schema) => schema.required("Required"),
+    otherwise: (schema) => schema.notRequired(),
   }),
   ownerName: Yup.string().when("complainantType", {
     is: "Private Entity",
     then: (schema) => schema.required("Required"),
+    otherwise: (schema) => schema.notRequired(),
   }),
   expiryDate: Yup.string().when("complainantType", {
     is: "Private Entity",
     then: (schema) => schema.required("Required"),
+    otherwise: (schema) => schema.notRequired(),
   }),
   hasBranches: Yup.boolean().when("complainantType", {
     is: "Private Entity",
     then: (schema) => schema.required("Required"),
+    otherwise: (schema) => schema.notRequired(),
   }),
-  companyContactNumber: Yup.string().when("complainantType", {
-    is: "Private Entity",
-    then: (schema) =>
-      schema
-        .matches(/^971\d{7,9}$/, "Invalid contact number")
-        .required("Required"),
-  }),
-  complainantAddress: Yup.string().required("Required"),
   details: Yup.string()
     .max(2000, "Maximum limit: 2000 characters")
     .required("Required"),
   relation: Yup.string().required("Required"),
   file: Yup.mixed()
-    .required("File is required")
+    .nullable()
     .test("fileType", "Unsupported File Format", (value) => {
-      return value && supportedFormats.indexOf((value as File).type) !== -1;
+      return !value || supportedFormats.indexOf((value as File).type) !== -1;
     }),
+
   financialLosses: Yup.boolean().required("Required"),
   actualLosses: Yup.string().when("financialLosses", {
     is: true,
     then: (schema) => schema.required("Required"),
+    otherwise: (schema) => schema.notRequired(),
   }),
   approximateLosses: Yup.string().notRequired(),
   paymentMethod: Yup.array().when("financialLosses", {
     is: true,
-    then: (schema) => schema.required("Required"),
+    then: (schema) =>
+      schema
+        .required("Required")
+        .test("is-not-empty", "Required", (value) => value && value.length > 0),
+    otherwise: (schema) => schema.notRequired(),
   }),
   acceptTerms: Yup.boolean().oneOf([true], "Accept Terms is required"),
   captcha: Yup.string().required("Required"),
-  personal: Yup.object().when("complainantType", {
-    is: "Personal",
-    then: () => personalSchema,
-  }),
 });
